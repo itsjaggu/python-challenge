@@ -12,38 +12,55 @@ with open(csvpath) as csvfile:
 
     totalmonths = 0
     totalamount = 0
+    avgchange = [0]
+    preamount = 0
+    curramount = 0
+    changeamount = 0
     greatestincrease = 0
     greatestincreasemonth = ""
     greatestdecrease = 0
     greatestdecreasemonth = ""
 
     for row in csvreader:
-        amount = float(row[1])
+        curramount = float(row[1])
+
         # The total number of months included in the dataset
         totalmonths = totalmonths + 1
 
         # The net total amount of "Profit/Losses" over the entire period
-        totalamount = totalamount + amount
+        totalamount = totalamount + curramount
+
+        if preamount == 0:
+            preamount = curramount
+        else:
+            changeamount = curramount - preamount
+            preamount = curramount
+            
+        # The average of the changes in "Profit/Losses" over the entire period
+        if changeamount != 0:
+            avgchange.append(changeamount)
 
         # The greatest increase in profits (date and amount) over the entire period
-        if amount > greatestincrease:
-            greatestincrease = amount
+        if changeamount > greatestincrease:
+            greatestincrease = changeamount
             greatestincreasemonth = str(row[0])
 
         # The greatest decrease in losses (date and amount) over the entire period
-        if amount < greatestdecrease:
-            greatestdecrease = amount
+        if changeamount < greatestdecrease:
+            greatestdecrease = changeamount
             greatestdecreasemonth = str(row[0])
     
+    avgchangeamountdollar = "${:,.2f}".format(sum(avgchange)/len(avgchange))
     totalamountdollar = "${:,.2f}".format(totalamount)
     greatestincreasedollar = "${:,.2f}".format(greatestincrease)
     greatestdecreasedollar = "${:,.2f}".format(greatestdecrease)
-    print(totalmonths)
-    print(totalamountdollar)
+    
+    print(f"Total Months: {totalmonths}")
+    print(f"Total: {totalamountdollar}")
+    print(f"Length: {len(avgchange)}")
+    print(f"Average  Change: {avgchangeamountdollar}")
     print(f"Greatest Increase in Profits: {greatestincreasemonth} ({greatestincreasedollar})")
     print(f"Greatest Decrease in Profits: {greatestdecreasemonth} ({greatestdecreasedollar})")
-
-# The average of the changes in "Profit/Losses" over the entire period
 
 # Final Output
 # Financial Analysis
