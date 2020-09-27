@@ -12,7 +12,7 @@ with open(csvpath) as csvfile:
 
     totalmonths = 0
     totalamount = 0
-    avgchange = [0]
+    avgchange = []
     preamount = 0
     curramount = 0
     changeamount = 0
@@ -61,12 +61,3 @@ with open(csvpath) as csvfile:
     print(f"Average  Change: {avgchangeamountdollar}")
     print(f"Greatest Increase in Profits: {greatestincreasemonth} ({greatestincreasedollar})")
     print(f"Greatest Decrease in Profits: {greatestdecreasemonth} ({greatestdecreasedollar})")
-
-# Final Output
-# Financial Analysis
-# ----------------------------
-# Total Months: 86
-# Total: $38382578
-# Average  Change: $-2315.12
-# Greatest Increase in Profits: Feb-2012 ($1926159)
-# Greatest Decrease in Profits: Sep-2013 ($-2196167)
