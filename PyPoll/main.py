@@ -17,7 +17,10 @@ with open(csvpath) as csvfile:
     print(f"CSV Header: {csv_header}")
 
     totalvotes = 0
-    candidates = []
+    candidate_list = []
+    candidatesvotecount = dict()
+    winner = ""
+    winnervotes = 0
 
     for row in csvreader:
     # The total number of votes cast
@@ -26,8 +29,11 @@ with open(csvpath) as csvfile:
 
     # A complete list of candidates who received votes
     #for row in csvreader:
-        if row[2] not in candidates:
-            candidates.append(row[2])
+        if row[2] not in candidate_list:
+            candidate_list.append(row[2])
+            candidatesvotecount[row[2]] = 1
+        else:
+            candidatesvotecount[row[2]] = int(candidatesvotecount[row[2]]) + 1
 
         # The percentage of votes each candidate won
         
@@ -39,8 +45,13 @@ with open(csvpath) as csvfile:
     #avgchangeamountdollar = "${:,.2f}".format(sum(avgchange)/len(avgchange))
     
     print(f"Total Votes: {totalvotes}")
-    print(candidates)
-
+    for cand in candidate_list:
+        percentvote = "{:,.3f}%".format((candidatesvotecount[str(cand)] / totalvotes) * 100)
+        if winnervotes < candidatesvotecount[str(cand)]:
+            winnervotes = candidatesvotecount[str(cand)]
+            winner = cand
+        print(f"{cand}: {percentvote} ({candidatesvotecount[str(cand)]})")
+    print(f"Winner: {winner}")
 # Election Results
 # -------------------------
 # Total Votes: 3521001
