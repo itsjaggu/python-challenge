@@ -36,10 +36,13 @@ with open(csvpath) as csvfile:
 
 # Saving the results in text file and printing in terminal       
 saveresult = open(outputtext,"w")
+print("Election Results")
 saveresult.write("Election Results" + "\n")
+print("-----------------------------------")
 saveresult.write("-----------------------------------" + "\n")
 print(f"Total Votes: {totalvotes}")
 saveresult.write(f"Total Votes: {totalvotes}" + "\n")
+print("-----------------------------------")
 saveresult.write("-----------------------------------" + "\n")
 for cand in candidate_list:
     percentvote = "{:,.3f}%".format((candidatesvotecount[str(cand)] / totalvotes) * 100)
@@ -48,8 +51,10 @@ for cand in candidate_list:
         winner = cand
     print(f"{cand}: {percentvote} ({candidatesvotecount[str(cand)]})")
     saveresult.write(f"{cand}: {percentvote} ({candidatesvotecount[str(cand)]})" + "\n")
+print("-----------------------------------")
 saveresult.write("-----------------------------------" + "\n")
 print(f"Winner: {winner}")
 saveresult.write(f"Winner: {winner}" + "\n")
+print("-----------------------------------")
 saveresult.write("-----------------------------------" + "\n")
 saveresult.close()
