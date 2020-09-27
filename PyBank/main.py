@@ -64,7 +64,9 @@ greatestdecreasedollar = "${:,.2f}".format(greatestdecrease)
 
 # Saving the results in text file and printing in terminal
 saveresult = open(outputtext,"w")
+print("Financial Analysis")
 saveresult.write("Financial Analysis" + "\n")
+print("-----------------------------------")
 saveresult.write("-----------------------------------" + "\n")
 print(f"Total Months: {totalmonths}")
 saveresult.write(f"Total Months: {totalmonths}" + "\n")
