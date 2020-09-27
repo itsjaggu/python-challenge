@@ -13,6 +13,7 @@ with open(csvpath) as csvfile:
     csv_header = next(csvreader)
     print(f"CSV Header: {csv_header}")
 
+    # Initializing variables
     totalmonths = 0
     totalamount = 0
     avgchange = []
@@ -24,6 +25,7 @@ with open(csvpath) as csvfile:
     greatestdecrease = 0
     greatestdecreasemonth = ""
 
+    # Reading rows of csv data file
     for row in csvreader:
         curramount = float(row[1])
 
@@ -33,6 +35,7 @@ with open(csvpath) as csvfile:
         # The net total amount of "Profit/Losses" over the entire period
         totalamount = totalamount + curramount
 
+        # Setting precious row amount and computing change in amount
         if preamount == 0:
             preamount = curramount
         else:
@@ -52,12 +55,14 @@ with open(csvpath) as csvfile:
         if changeamount < greatestdecrease:
             greatestdecrease = changeamount
             greatestdecreasemonth = str(row[0])
-    
+
+# converting amount format to currency for output  
 avgchangeamountdollar = "${:,.2f}".format(sum(avgchange)/len(avgchange))
 totalamountdollar = "${:,.2f}".format(totalamount)
 greatestincreasedollar = "${:,.2f}".format(greatestincrease)
 greatestdecreasedollar = "${:,.2f}".format(greatestdecrease)
 
+# Saving the results in text file and printing in terminal
 saveresult = open(outputtext,"w")
 saveresult.write("Financial Analysis" + "\n")
 saveresult.write("-----------------------------------" + "\n")

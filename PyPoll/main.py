@@ -13,12 +13,14 @@ with open(csvpath) as csvfile:
     csv_header = next(csvreader)
     print(f"CSV Header: {csv_header}")
 
+    # Initializing variables
     totalvotes = 0
     candidate_list = []
     candidatesvotecount = dict()
     winner = ""
     winnervotes = 0
 
+    # Reading rows of csv data file
     for row in csvreader:
     # The total number of votes cast
     # totalvotes = sum(1 for row in csvreader)
@@ -31,7 +33,8 @@ with open(csvpath) as csvfile:
             candidatesvotecount[row[2]] = 1
         else:
             candidatesvotecount[row[2]] = int(candidatesvotecount[row[2]]) + 1
-        
+
+# Saving the results in text file and printing in terminal       
 saveresult = open(outputtext,"w")
 saveresult.write("Election Results" + "\n")
 saveresult.write("-----------------------------------" + "\n")
