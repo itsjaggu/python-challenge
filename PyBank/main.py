@@ -4,6 +4,9 @@ import csv
 # Getting path for csv data file
 csvpath = os.path.join("Resources","budget_data.csv")
 
+# Output text file path
+outputtext = os.path.join("Analysis","PyBank_Result.txt")
+
 # Reading csv data file
 with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=",")
@@ -50,14 +53,23 @@ with open(csvpath) as csvfile:
             greatestdecrease = changeamount
             greatestdecreasemonth = str(row[0])
     
-    avgchangeamountdollar = "${:,.2f}".format(sum(avgchange)/len(avgchange))
-    totalamountdollar = "${:,.2f}".format(totalamount)
-    greatestincreasedollar = "${:,.2f}".format(greatestincrease)
-    greatestdecreasedollar = "${:,.2f}".format(greatestdecrease)
-    
-    print(f"Total Months: {totalmonths}")
-    print(f"Total: {totalamountdollar}")
-    print(f"Length: {len(avgchange)}")
-    print(f"Average  Change: {avgchangeamountdollar}")
-    print(f"Greatest Increase in Profits: {greatestincreasemonth} ({greatestincreasedollar})")
-    print(f"Greatest Decrease in Profits: {greatestdecreasemonth} ({greatestdecreasedollar})")
+avgchangeamountdollar = "${:,.2f}".format(sum(avgchange)/len(avgchange))
+totalamountdollar = "${:,.2f}".format(totalamount)
+greatestincreasedollar = "${:,.2f}".format(greatestincrease)
+greatestdecreasedollar = "${:,.2f}".format(greatestdecrease)
+
+saveresult = open(outputtext,"w")
+saveresult.write("Financial Analysis" + "\n")
+saveresult.write("-----------------------------------" + "\n")
+print(f"Total Months: {totalmonths}")
+saveresult.write(f"Total Months: {totalmonths}")
+print(f"Total: {totalamountdollar}")
+saveresult.write("\n" + f"Total: {totalamountdollar}")
+#print(f"Length: {len(avgchange)}")
+print(f"Average  Change: {avgchangeamountdollar}")
+saveresult.write("\n" + f"Average  Change: {avgchangeamountdollar}")
+print(f"Greatest Increase in Profits: {greatestincreasemonth} ({greatestincreasedollar})")
+saveresult.write("\n" + f"Greatest Increase in Profits: {greatestincreasemonth} ({greatestincreasedollar})")
+print(f"Greatest Decrease in Profits: {greatestdecreasemonth} ({greatestdecreasedollar})")
+saveresult.write("\n" + f"Greatest Decrease in Profits: {greatestdecreasemonth} ({greatestdecreasedollar})")
+saveresult.close()
