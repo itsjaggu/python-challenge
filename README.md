@@ -23,7 +23,7 @@ The output of analysis is printed in the terminal window and it also get saved i
   Greatest Decrease in Profits: Sep-2013 ($-2,196,167.00)
   ```
 ## [Election Poll Analysis (PyPoll)](PyPoll)
-The [PyPoll script](PyPoll/mian.py) runs row by row on the csv data file available in the [Resources](PyPoll/Resources) folder to analyze the data. The analysis includes following key metrics:
+The [PyPoll script](PyPoll/main.py) runs row by row on the csv data file available in the [Resources](PyPoll/Resources) folder to analyze the data. The analysis includes following key metrics:
   * The total number of votes cast
 
   * A complete list of candidates who received votes
